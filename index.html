@@ -11,7 +11,7 @@
     
     <style>
         :root {
-            --bg-color: #f4f1ea; /* Fondo crema papel */
+            --bg-color: #f4f1ea;
             --card-bg: #ffffff;
             --primary-text: #2c3e50;
             --accent-color: #8e44ad;
@@ -86,30 +86,14 @@
             font-size: 1rem;
         }
 
-        /* Contenedor sin fondo gris */
         .visual-container {
             width: 100%;
             min-height: 400px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: transparent; /* Eliminado el fondo gris */
+            display: block;
+            background: transparent;
             border-radius: 4px;
             overflow: hidden;
             padding: 10px 0;
-        }
-
-        .visual-container object {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            margin: 0 auto;
-        }
-
-        .visual-container iframe {
-            width: 100% !important;
-            border: none;
-            background: transparent;
         }
 
         footer {
@@ -117,7 +101,7 @@
             padding: 60px 20px;
             font-size: 0.85rem;
             color: #777;
-            background: transparent; /* Footer más ligero */
+            background: transparent;
             border-top: 1px solid var(--border-color);
             margin-top: 40px;
         }
@@ -135,52 +119,46 @@
 <div class="container">
     <header>
         <h1>Analíticas Deportivas</h1>
-        <p class="subtitle">Revisión de estadísticas de un reloj inteligente </p>
+        <p class="subtitle">Revisión de estadísticas de un reloj inteligente</p>
         <p class="author">Damián Silva</p>
     </header>
 
     <section>
-        <h2>¿Cuáles son los géneros que más leo?</h2>
+        <h2>Gráfico 1</h2>
         <p class="chart-description">
-            Exploración inicial de la composición de mis lecturas según los géneros literarios.
+            Descripción del primer gráfico.
         </p>
         <div class="visual-container">
-            <object data="categoria_genero_subgenero.svg" type="image/svg+xml"></object>
-        </div>
-    </section>
-
-    <section>
-        <h2>Evolución de páginas por trimestre</h2>
-        <p class="chart-description">
-            Evolución temporal de las páginas leídas por categoría.
-        </p>
-        <div class="visual-container">
-            <div class="flourish-embed flourish-chart" data-src="visualisation/28065791" style="width:100%">
+            <div class="flourish-embed flourish-chart" data-src="visualisation/28152335">
                 <script src="https://public.flourish.studio/resources/embed.js"></script>
+                <noscript><img src="https://public.flourish.studio/visualisation/28152335/thumbnail" width="100%" alt="visualization" /></noscript>
             </div>
         </div>
     </section>
 
     <section>
-        <h2>Mis valoraciones vs. Promedio Goodreads</h2>
+        <h2>Gráfico 2</h2>
         <p class="chart-description">
-            Comparativa detallada entre mi valoración personal frente al promedio de los usuarios.
+            Descripción del segundo gráfico.
         </p>
-        <div class="visual-container" style="display: block; height: auto;">
-            <iframe title="Diferencias de puntaje" id="datawrapper-chart-Keahc" src="https://datawrapper.dwcdn.net/Keahc/2/" scrolling="no" frameborder="0" style="width: 100% !important; border: none;" height="800"></iframe>
-            <script type="text/javascript">
-                window.addEventListener("message", function(a) {
-                    if (void 0 !== a.data["datawrapper-height"]) {
-                        var e = document.querySelectorAll("iframe");
-                        for (var t in a.data["datawrapper-height"])
-                            for (var r, i = 0; r = e[i]; i++)
-                                if (r.contentWindow === a.source) {
-                                    var d = a.data["datawrapper-height"][t] + "px";
-                                    r.style.height = d
-                                }
-                    }
-                });
-            </script>
+        <div class="visual-container">
+            <div class="flourish-embed flourish-chart" data-src="visualisation/28164152">
+                <script src="https://public.flourish.studio/resources/embed.js"></script>
+                <noscript><img src="https://public.flourish.studio/visualisation/28164152/thumbnail" width="100%" alt="visualization" /></noscript>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Gráfico 3</h2>
+        <p class="chart-description">
+            Descripción del tercer gráfico.
+        </p>
+        <div class="visual-container">
+            <div class="flourish-embed flourish-chart" data-src="visualisation/28165721">
+                <script src="https://public.flourish.studio/resources/embed.js"></script>
+                <noscript><img src="https://public.flourish.studio/visualisation/28165721/thumbnail" width="100%" alt="visualization" /></noscript>
+            </div>
         </div>
     </section>
 
