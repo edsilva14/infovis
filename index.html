@@ -1,1 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Radiografía de mis hábitos de lectura - Agustina Hernandez Maczan</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #f4f1ea; /* Fondo crema papel */
+            --card-bg: #ffffff;
+            --primary-text: #2c3e50;
+            --accent-color: #8e44ad;
+            --border-color: #dcd7cc;
+        }
 
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--primary-text);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 10px;
+            color: #1a1a1a;
+        }
+
+        .subtitle {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.4rem;
+            color: #555;
+            margin-top: 0;
+        }
+
+        .author {
+            margin-top: 20px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            font-size: 0.85rem;
+            color: var(--accent-color);
+            text-transform: uppercase;
+        }
+
+        section {
+            background: var(--card-bg);
+            padding: 40px;
+            margin-bottom: 50px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-top: 0;
+            border-bottom: 2px solid var(--bg-color);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+
+        .chart-description {
+            margin-bottom: 30px;
+            color: #666;
+            font-size: 1rem;
+        }
+
+        /* Contenedor sin fondo gris */
+        .visual-container {
+            width: 100%;
+            min-height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: transparent; /* Eliminado el fondo gris */
+            border-radius: 4px;
+            overflow: hidden;
+            padding: 10px 0;
+        }
+
+        .visual-container object {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .visual-container iframe {
+            width: 100% !important;
+            border: none;
+            background: transparent;
+        }
+
+        footer {
+            text-align: center;
+            padding: 60px 20px;
+            font-size: 0.85rem;
+            color: #777;
+            background: transparent; /* Footer más ligero */
+            border-top: 1px solid var(--border-color);
+            margin-top: 40px;
+        }
+
+        footer p { margin: 5px 0; }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.2rem; }
+            section { padding: 25px 15px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Radiografía de mis hábitos de lectura</h1>
+        <p class="subtitle">Análisis visual de mis lecturas a lo largo de los últimos años</p>
+        <p class="author">Agustina Hernandez Maczan</p>
+    </header>
+
+    <section>
+        <h2>¿Cuáles son los géneros que más leo?</h2>
+        <p class="chart-description">
+            Exploración inicial de la composición de mis lecturas según los géneros literarios.
+        </p>
+        <div class="visual-container">
+            <object data="categoria_genero_subgenero.svg" type="image/svg+xml"></object>
+        </div>
+    </section>
+
+    <section>
+        <h2>Evolución de páginas por trimestre</h2>
+        <p class="chart-description">
+            Evolución temporal de las páginas leídas por categoría.
+        </p>
+        <div class="visual-container">
+            <div class="flourish-embed flourish-chart" data-src="visualisation/28065791" style="width:100%">
+                <script src="https://public.flourish.studio/resources/embed.js"></script>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Mis valoraciones vs. Promedio Goodreads</h2>
+        <p class="chart-description">
+            Comparativa detallada entre mi valoración personal frente al promedio de los usuarios.
+        </p>
+        <div class="visual-container" style="display: block; height: auto;">
+            <iframe title="Diferencias de puntaje" id="datawrapper-chart-Keahc" src="https://datawrapper.dwcdn.net/Keahc/2/" scrolling="no" frameborder="0" style="width: 100% !important; border: none;" height="800"></iframe>
+            <script type="text/javascript">
+                window.addEventListener("message", function(a) {
+                    if (void 0 !== a.data["datawrapper-height"]) {
+                        var e = document.querySelectorAll("iframe");
+                        for (var t in a.data["datawrapper-height"])
+                            for (var r, i = 0; r = e[i]; i++)
+                                if (r.contentWindow === a.source) {
+                                    var d = a.data["datawrapper-height"][t] + "px";
+                                    r.style.height = d
+                                }
+                    }
+                });
+            </script>
+        </div>
+    </section>
+
+    <footer>
+        <p><strong>Trabajo Práctico: Visualización de Datos Personales</strong></p>
+        <p>Agustina Hernandez Maczan | ECD.2025.A</p>
+        <p>Instituto Tecnológico de Buenos Aires (ITBA)</p>
+    </footer>
+</div>
+
+</body>
+</html>
