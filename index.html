@@ -1,241 +1,333 @@
-|<!DOCTYPE html>
-<html lang="es">
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Analíticas Deportivas - Damián Silva</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --bg-color: #f4f1ea;
-            --card-bg: #ffffff;
-            --primary-text: #2c3e50;
-            --accent-color: #8e44ad;
-            --border-color: #dcd7cc;
-        }
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analíticas Deportivas | Damián Silva</title>
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--primary-text);
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-        }
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏃</text></svg>">
 
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 60px 20px;
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Outfit', 'sans-serif'],
+            display: ['"Space Grotesk"', 'sans-serif'],
+          },
+          animation: { 'blob': 'blob 10s infinite' },
+          keyframes: {
+            blob: {
+              '0%':   { transform: 'translate(0px,0px) scale(1)' },
+              '33%':  { transform: 'translate(30px,-50px) scale(1.1)' },
+              '66%':  { transform: 'translate(-20px,20px) scale(0.9)' },
+              '100%': { transform: 'translate(0px,0px) scale(1)' },
+            }
+          }
         }
+      }
+    }
+  </script>
 
-        header {
-            text-align: center;
-            margin-bottom: 80px;
-        }
-
-        h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 3rem;
-            margin-bottom: 10px;
-            color: #1a1a1a;
-        }
-
-        .subtitle {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            font-size: 1.4rem;
-            color: #555;
-            margin-top: 0;
-        }
-
-        .author {
-            margin-top: 20px;
-            font-weight: 600;
-            letter-spacing: 2px;
-            font-size: 0.85rem;
-            color: var(--accent-color);
-            text-transform: uppercase;
-        }
-
-        section {
-            background: var(--card-bg);
-            padding: 40px;
-            margin-bottom: 50px;
-            border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-            border: 1px solid var(--border-color);
-        }
-
-        h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            margin-top: 0;
-            border-bottom: 2px solid var(--bg-color);
-            padding-bottom: 15px;
-            margin-bottom: 25px;
-        }
-
-        .chart-description {
-            margin-bottom: 30px;
-            color: #666;
-            font-size: 1rem;
-        }
-
-        .visual-container {
-            width: 100%;
-            min-height: 400px;
-            display: block;
-            background: transparent;
-            border-radius: 4px;
-            overflow: hidden;
-            padding: 10px 0;
-        }
-
-        footer {
-            text-align: center;
-            padding: 60px 20px;
-            font-size: 0.85rem;
-            color: #777;
-            background: transparent;
-            border-top: 1px solid var(--border-color);
-            margin-top: 40px;
-        }
-
-        footer p { margin: 5px 0; }
-
-        @media (max-width: 768px) {
-            h1 { font-size: 2.2rem; }
-            section { padding: 25px 15px; }
-        }
-    </style>
+  <style>
+    body { background-color: #f1f5f9; overflow-x: hidden; }
+    .glass-panel {
+      background: rgba(255,255,255,0.65);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.8);
+      box-shadow: 0 8px 32px 0 rgba(31,38,135,0.07);
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s cubic-bezier(0.5,0,0,1);
+    }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+    section, .scroll-mt { scroll-margin-top: 8rem; }
+  </style>
 </head>
-<body>
+<body class="text-slate-800 font-sans antialiased min-h-screen relative selection:bg-violet-200 selection:text-violet-900">
 
-<div class="container">
-    <header>
-        <h1>Analíticas Deportivas</h1>
-        <p class="subtitle">Revisión de estadísticas de un reloj inteligente</p>
-        <p class="author">Damián Silva</p>
+  <!-- Blobs de fondo -->
+  <div class="fixed inset-0 w-full h-full -z-10 overflow-hidden pointer-events-none">
+    <div class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-violet-300 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob"></div>
+    <div class="absolute top-[20%] right-[-5%] w-96 h-96 bg-emerald-300 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob" style="animation-delay:2s"></div>
+    <div class="absolute bottom-[-20%] left-[20%] w-96 h-96 bg-orange-300 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob" style="animation-delay:4s"></div>
+  </div>
+
+  <!-- Navbar -->
+  <div class="fixed top-6 left-0 right-0 z-50 px-4 pointer-events-none flex justify-center">
+    <nav class="w-full max-w-[96%] glass-panel rounded-full px-6 py-3 flex justify-between items-center pointer-events-auto transition-all duration-300 hover:bg-white/80">
+      <span class="font-display font-bold text-slate-900 text-xl tracking-tighter">ITBA</span>
+      <div class="relative">
+        <button id="dropdown-btn" class="flex items-center gap-2 text-sm font-semibold text-slate-800 bg-white/50 hover:bg-white px-5 py-2 rounded-full transition-all focus:outline-none">
+          Menú
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+        </button>
+        <div id="dropdown-menu" class="absolute right-0 mt-3 w-64 glass-panel rounded-2xl hidden flex-col py-3 z-50">
+          <div class="px-4 pb-2">
+            <h3 class="text-xs font-display font-bold text-slate-400 uppercase tracking-widest mb-2">Analíticas Deportivas</h3>
+            <div class="space-y-1">
+              <a href="#metricas"   class="block text-sm font-medium text-slate-600 hover:text-violet-600 hover:bg-violet-50/50 px-3 py-2 rounded-lg transition-colors dropdown-link">0. Métricas principales</a>
+              <a href="#grafico-1" class="block text-sm font-medium text-slate-600 hover:text-violet-600 hover:bg-violet-50/50 px-3 py-2 rounded-lg transition-colors dropdown-link">1. Actividades por pasos</a>
+              <a href="#grafico-2" class="block text-sm font-medium text-slate-600 hover:text-violet-600 hover:bg-violet-50/50 px-3 py-2 rounded-lg transition-colors dropdown-link">2. Distancias recorridas</a>
+              <a href="#grafico-3" class="block text-sm font-medium text-slate-600 hover:text-violet-600 hover:bg-violet-50/50 px-3 py-2 rounded-lg transition-colors dropdown-link">3. División de actividades</a>
+              <a href="#grafico-4" class="block text-sm font-medium text-slate-600 hover:text-violet-600 hover:bg-violet-50/50 px-3 py-2 rounded-lg transition-colors dropdown-link">4. Frecuencia cardíaca</a>
+              <a href="#grafico-5" class="block text-sm font-medium text-slate-600 hover:text-violet-600 hover:bg-violet-50/50 px-3 py-2 rounded-lg transition-colors dropdown-link">5. Distancia vs. calorías</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <main class="p-4 pt-32 md:p-8 md:pt-36 w-full max-w-[96%] mx-auto space-y-12">
+
+    <!-- Header -->
+    <header class="text-center space-y-6 reveal">
+      <div class="inline-block px-4 py-1.5 rounded-full bg-violet-100/50 border border-violet-200/50 text-violet-800 text-sm font-semibold tracking-wide mb-4">
+        Visualización de la Información
+      </div>
+      <h1 class="text-5xl md:text-7xl font-display font-bold tracking-tighter text-slate-900 leading-tight">
+        Datos que cuentan<br/>
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-violet-500 to-emerald-500">kilómetros.</span>
+      </h1>
+      <p class="text-xl text-slate-600 font-light max-w-2xl mx-auto pb-4">
+        Exploración analítica de actividades físicas registradas por <strong class="font-semibold text-slate-800">Damián Silva</strong>.
+      </p>
     </header>
 
-	
-  <section>
-        <h2>Métricas Principales</h2>
-        <p class="chart-description">
-    Analizando datos de la aplicación Garmin Connect, se revisa mi actividad a lo largo de 2025 y los primeros meses de 2026. Allí se registran 142 actividades, mezclando distintas actividades
-			tales caminatas, trail running y carreras. Se gastaron más de 51000 calorías, totalizando cerca de 801 kilometros y con una frecuencia cardíaca de 151 latidos por minuto.
-		</p>
-<iframe title="Principales Métricas" aria-label="Table" id="datawrapper-chart-zJLMY" src="https://datawrapper.dwcdn.net/zJLMY/2/" scrolling="no" frameborder="0" style="width: 0; min-width: 100% !important; border: none;" height="155" data-external="1"></iframe><script type="text/javascript">window.addEventListener("message",function(a){if(void 0!==a.data["datawrapper-height"]){var e=document.querySelectorAll("iframe");for(var t in a.data["datawrapper-height"])for(var r,i=0;r=e[i];i++)if(r.contentWindow===a.source){var d=a.data["datawrapper-height"][t]+"px";r.style.height=d}}});</script>  </div>
-    </section>
+    <!-- Intro -->
+    <div class="text-center max-w-4xl mx-auto space-y-4 reveal">
+      <h2 class="text-3xl md:text-4xl font-display font-bold text-slate-900 tracking-tight">Un año en movimiento</h2>
+      <p class="text-slate-600 text-lg font-light leading-relaxed">
+        Analizando datos de la aplicación Garmin Connect, se revisa mi actividad a lo largo de 2025 y los primeros meses de 2026. Se registran 142 actividades que incluyen caminatas, trail running y carreras, con más de 51.000 calorías quemadas, cerca de 801 kilómetros totales y una frecuencia cardíaca media de 151 latidos por minuto.
+      </p>
+    </div>
 
-	
-    <!-- Gráfico 1 - Flourish -->
-    <section>
-        <h2>Actividades por pasos</h2>
-        <p class="chart-description">
-            ¿Hacia dónde se van mis actividades? Las mismas se dividen principalmente a 3 actividades: 
-<ol>
-  <li>Carreras</li>
-  <li>Carreras en senderos (trail running)</li>
-  <li>Ciclismo</li>
-	<li>Etc.</li>
-</ol>
-              
+    <!-- Cards de stats -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-6xl mx-auto reveal">
+      <div class="glass-panel p-6 rounded-[2rem] flex flex-col items-center justify-center text-center transition-all duration-300 hover:-translate-y-2 hover:shadow-lg group">
+        <div class="w-14 h-14 bg-violet-100/80 text-violet-600 rounded-full flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">🏃</div>
+        <span class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Km totales</span>
+        <span class="text-3xl font-display font-bold text-slate-800">801</span>
+      </div>
+      <div class="glass-panel p-6 rounded-[2rem] flex flex-col items-center justify-center text-center transition-all duration-300 hover:-translate-y-2 hover:shadow-lg group">
+        <div class="w-14 h-14 bg-emerald-100/80 text-emerald-600 rounded-full flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">📅</div>
+        <span class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Actividades</span>
+        <span class="text-3xl font-display font-bold text-slate-800">142</span>
+      </div>
+      <div class="glass-panel p-6 rounded-[2rem] flex flex-col items-center justify-center text-center transition-all duration-300 hover:-translate-y-2 hover:shadow-lg group">
+        <div class="w-14 h-14 bg-orange-100/80 text-orange-600 rounded-full flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">🔥</div>
+        <span class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Calorías</span>
+        <span class="text-3xl font-display font-bold text-slate-800">51k</span>
+      </div>
+      <div class="glass-panel p-6 rounded-[2rem] flex flex-col items-center justify-center text-center transition-all duration-300 hover:-translate-y-2 hover:shadow-lg group">
+        <div class="w-14 h-14 bg-rose-100/80 text-rose-600 rounded-full flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">❤️</div>
+        <span class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">FC media</span>
+        <span class="text-3xl font-display font-bold text-slate-800">151 bpm</span>
+      </div>
+    </div>
+
+    <!-- Sección 0: Métricas -->
+    <section id="metricas" class="scroll-mt reveal group">
+      <div class="mb-6">
+        <span class="text-slate-500 font-bold tracking-widest text-sm uppercase mb-2 block">0. Datawrapper | Resumen</span>
+        <h3 class="text-3xl font-display font-bold text-slate-900 group-hover:text-violet-600 transition-colors duration-300">Métricas principales</h3>
+        <p class="text-lg text-slate-500 mt-2 font-light">
+          Analizando datos de la aplicación Garmin Connect, se revisa mi actividad a lo largo de 2025 y los primeros meses de 2026. Allí se registran 142 actividades, mezclando distintas actividades tales como caminatas, trail running y carreras. Se gastaron más de 51.000 calorías, totalizando cerca de 801 kilómetros y con una frecuencia cardíaca de 151 latidos por minuto.
         </p>
-        <div class="visual-container">
-            <div class="flourish-embed flourish-chart" data-src="visualisation/28152335">
-                <script src="https://public.flourish.studio/resources/embed.js"></script>
-                <noscript><img src="https://public.flourish.studio/visualisation/28152335/thumbnail" width="100%" alt="visualization" /></noscript>
-            </div>
+      </div>
+      <div class="glass-panel rounded-[2rem] p-4 md:p-6 transition-transform duration-500 hover:scale-[1.01]">
+        <div class="bg-white rounded-2xl overflow-hidden shadow-sm p-4 w-full">
+          <iframe title="Principales Métricas" aria-label="Table" id="datawrapper-chart-zJLMY" src="https://datawrapper.dwcdn.net/zJLMY/2/" scrolling="no" frameborder="0" style="width: 0; min-width: 100% !important; border: none;" height="155" data-external="1"></iframe>
+          <script type="text/javascript">window.addEventListener("message",function(a){if(void 0!==a.data["datawrapper-height"]){var e=document.querySelectorAll("iframe");for(var t in a.data["datawrapper-height"])for(var r,i=0;r=e[i];i++)if(r.contentWindow===a.source){var d=a.data["datawrapper-height"][t]+"px";r.style.height=d}}});</script>
         </div>
+      </div>
     </section>
 
-    <!-- Gráfico SVG -->
-    <section>
-        <h2>Distancias Recorridas </h2>
-        <p class="chart-description">
-            El mes de Noviembre de 2025 fue un mes de gran actividad, ya que hice la carrera de 22K de bariloche, teniendo un aumento progresivo en la cantidad de kilometros
-			recorridos.
+    <!-- Sección 1: Actividades por pasos -->
+    <section id="grafico-1" class="scroll-mt reveal group">
+      <div class="mb-6">
+        <span class="text-violet-600 font-bold tracking-widest text-sm uppercase mb-2 block">1. Flourish | Visión General</span>
+        <h3 class="text-3xl font-display font-bold text-slate-900 group-hover:text-violet-600 transition-colors duration-300">Actividades por pasos</h3>
+        <p class="text-lg text-slate-500 mt-2 font-light">
+          La distribución de actividades refleja el perfil deportivo predominante del atleta. Las actividades se dividen principalmente en tres disciplinas: carreras en calle, trail running y ciclismo. El peso relativo de cada una permite identificar hacia dónde se orienta la carga de entrenamiento total. Una concentración elevada en una sola disciplina puede indicar especialización o preparación para un objetivo puntual.
         </p>
-        <div class="visual-container">
-            <object
-                data="viz.svg"
-                type="image/svg+xml"
-                style="width: 100%; height: auto; min-height: 400px;">
+      </div>
+      <div class="glass-panel rounded-[2rem] p-4 md:p-6 transition-transform duration-500 hover:scale-[1.01]">
+        <div class="bg-white rounded-2xl overflow-hidden shadow-sm p-2 w-full">
+          <div class="flourish-embed flourish-chart" data-src="visualisation/28152335" style="min-height: 60vh;">
+            <script src="https://public.flourish.studio/resources/embed.js"></script>
+            <noscript><img src="https://public.flourish.studio/visualisation/28152335/thumbnail" width="100%" alt="visualization"/></noscript>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección 2: Distancias recorridas (SVG) -->
+    <section id="grafico-2" class="scroll-mt reveal group">
+      <div class="mb-6">
+        <span class="text-emerald-600 font-bold tracking-widest text-sm uppercase mb-2 block">2. RAWGraphs | Dinámica Temporal</span>
+        <h3 class="text-3xl font-display font-bold text-slate-900 group-hover:text-emerald-600 transition-colors duration-300">Distancias recorridas</h3>
+        <p class="text-lg text-slate-500 mt-2 font-light">
+          El volumen de kilómetros mensuales es el indicador más directo de la carga de entrenamiento acumulada. El mes de noviembre de 2025 fue un mes de gran actividad, culminando con la carrera de 22K de Bariloche, con un aumento progresivo en la cantidad de kilómetros recorridos. Este gráfico permite visualizar ciclos de carga y descarga, e identificar mesetas o interrupciones en la planificación deportiva.
+        </p>
+      </div>
+      <div class="glass-panel rounded-[2rem] p-4 md:p-6 transition-transform duration-500 hover:scale-[1.01]">
+        <div class="bg-white rounded-2xl overflow-hidden shadow-sm flex items-center justify-center min-h-[60vh]">
+          <object data="viz.svg" type="image/svg+xml" style="width:100%; height:auto; min-height:400px;"></object>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección 3: División de actividades (Tableau) -->
+    <section id="grafico-3" class="scroll-mt reveal group">
+      <div class="mb-6">
+        <span class="text-cyan-600 font-bold tracking-widest text-sm uppercase mb-2 block">3. Tableau | Distribución Geográfica</span>
+        <h3 class="text-3xl font-display font-bold text-slate-900 group-hover:text-cyan-600 transition-colors duration-300">División de las actividades</h3>
+        <p class="text-lg text-slate-500 mt-2 font-light">
+          En cada salida, se registraron las actividades por tipo y ciudad. Las principales locaciones son CABA y Chivilcoy, reflejando los distintos contextos en los que se desarrolló el entrenamiento: el ritmo urbano de la ciudad y la naturaleza más abierta del interior.
+        </p>
+      </div>
+      <div class="glass-panel rounded-[2rem] p-4 md:p-6 transition-transform duration-500 hover:scale-[1.01]">
+        <div class="bg-white rounded-2xl overflow-hidden shadow-sm p-2 w-full">
+          <div class="tableauPlaceholder" id="viz1774703029271" style="position:relative; width:100%;">
+            <noscript><a href="#"><img alt="División de las actividades por ciudad y tipo" src="https://public.tableau.com/static/images/FC/FCmedia/Hoja2/1_rss.png" style="border:none"/></a></noscript>
+            <object class="tableauViz" style="display:none;">
+              <param name="host_url" value="https%3A%2F%2Fpublic.tableau.com%2F"/>
+              <param name="embed_code_version" value="3"/>
+              <param name="site_root" value=""/>
+              <param name="name" value="FCmedia/Hoja2"/>
+              <param name="tabs" value="no"/>
+              <param name="toolbar" value="yes"/>
+              <param name="static_image" value="https://public.tableau.com/static/images/FC/FCmedia/Hoja2/1.png"/>
+              <param name="animate_transition" value="yes"/>
+              <param name="display_static_image" value="yes"/>
+              <param name="display_spinner" value="yes"/>
+              <param name="display_overlay" value="yes"/>
+              <param name="display_count" value="yes"/>
+              <param name="language" value="es-ES"/>
             </object>
+          </div>
+          <script type="text/javascript">
+            var divElement = document.getElementById('viz1774703029271');
+            var vizElement = divElement.getElementsByTagName('object')[0];
+            vizElement.style.width='100%';
+            vizElement.style.height=(divElement.offsetWidth*0.75)+'px';
+            var scriptElement = document.createElement('script');
+            scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+            vizElement.parentNode.insertBefore(scriptElement, vizElement);
+          </script>
         </div>
+      </div>
     </section>
 
-
-	    <!-- Gráfico SVG -->
-    <section>
-        <h2>División de las actividades </h2>
-        <p class="chart-description">
-            En cada viaje, se fueron grabando las interacciones por tipo de actividad y ciudad, siendo las principales CABA y Chivilcoy.
+    <!-- Sección 4: Frecuencia cardíaca (Tableau) -->
+    <section id="grafico-4" class="scroll-mt reveal group">
+      <div class="mb-6">
+        <span class="text-orange-600 font-bold tracking-widest text-sm uppercase mb-2 block">4. Tableau | Carga Cardiovascular</span>
+        <h3 class="text-3xl font-display font-bold text-slate-900 group-hover:text-orange-600 transition-colors duration-300">Frecuencia cardíaca por mes</h3>
+        <p class="text-lg text-slate-500 mt-2 font-light">
+          La frecuencia cardíaca media es uno de los indicadores más sensibles del estado de forma aeróbica. Se verifica una reducción de la frecuencia cardíaca promedio a lo largo del período, producto de la constancia en el entrenamiento; mostrando un mejor aclimatamiento y una mejora progresiva en la eficiencia cardiovascular. Una tendencia descendente ante cargas similares refleja adaptación fisiológica positiva.
         </p>
-	<div class='tableauPlaceholder' id='viz1774703029271' style='position: relative'><noscript><a href='#'>
-	<img alt='División de las actividades por ciudad y tipo ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;FC&#47;FCmedia&#47;Hoja2&#47;1_rss.png' style='border: none' />
-	</a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
-	<param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='FCmedia&#47;Hoja2' />
-	<param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;FC&#47;FCmedia&#47;Hoja2&#47;1.png' />
-	<param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' />
-	<param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='es-ES' /></object></div>                
-	<script type='text/javascript'>                   
-		var divElement = document.getElementById('viz1774703029271');         
-		var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                   
-	vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>   
+      </div>
+      <div class="glass-panel rounded-[2rem] p-4 md:p-6 transition-transform duration-500 hover:scale-[1.01]">
+        <div class="bg-white rounded-2xl overflow-hidden shadow-sm p-2 w-full">
+          <div class="tableauPlaceholder" id="viz1774693178036" style="position:relative; width:100%;">
+            <noscript><a href="#"><img alt="Frecuencia Cardíaca Media por mes" src="https://public.tableau.com/static/images/FC/FCmedia/Hoja1/1_rss.png" style="border:none"/></a></noscript>
+            <object class="tableauViz" style="display:none;">
+              <param name="host_url" value="https%3A%2F%2Fpublic.tableau.com%2F"/>
+              <param name="embed_code_version" value="3"/>
+              <param name="site_root" value=""/>
+              <param name="name" value="FCmedia/Hoja1"/>
+              <param name="tabs" value="no"/>
+              <param name="toolbar" value="yes"/>
+              <param name="static_image" value="https://public.tableau.com/static/images/FC/FCmedia/Hoja1/1.png"/>
+              <param name="animate_transition" value="yes"/>
+              <param name="display_static_image" value="yes"/>
+              <param name="display_spinner" value="yes"/>
+              <param name="display_overlay" value="yes"/>
+              <param name="display_count" value="yes"/>
+              <param name="language" value="es-ES"/>
+            </object>
+          </div>
+          <script type="text/javascript">
+            var divElement = document.getElementById('viz1774693178036');
+            var vizElement = divElement.getElementsByTagName('object')[0];
+            vizElement.style.width='100%';
+            vizElement.style.height=(divElement.offsetWidth*0.75)+'px';
+            var scriptElement = document.createElement('script');
+            scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+            vizElement.parentNode.insertBefore(scriptElement, vizElement);
+          </script>
         </div>
-        </div>
+      </div>
     </section>
 
-    <!-- Gráfico 3 - Flourish -->
-    <section>
-        <h2>Frecuencia Cardíaca por mes</h2>
-        <p class="chart-description">
-            Se revisa el promedio de la frecuencia cardiaca por cada uno de los meses de la muestra. En la misma, se verifica una reducción de la 
-			frecuencia cardíaca promedio, producto de la constancia en las mismas; mostrando un mejor aclimatamiento.
+    <!-- Sección 5: Distancia vs calorías (Flourish) -->
+    <section id="grafico-5" class="scroll-mt reveal group">
+      <div class="mb-6">
+        <span class="text-rose-600 font-bold tracking-widest text-sm uppercase mb-2 block">5. Flourish | Análisis de Eficiencia</span>
+        <h3 class="text-3xl font-display font-bold text-slate-900 group-hover:text-rose-600 transition-colors duration-300">Relación distancia vs. calorías</h3>
+        <p class="text-lg text-slate-500 mt-2 font-light">
+          La relación entre distancia recorrida y calorías consumidas no es perfectamente lineal: variables como la intensidad, el desnivel y el estado de forma del atleta generan dispersión en los datos. Cada punto representa una sesión individual. Los valores que se alejan de la tendencia central pueden indicar sesiones de alta intensidad relativa — donde el gasto calórico supera lo esperado para esa distancia — o bien actividades de recuperación activa con menor esfuerzo metabólico.
         </p>
-
-        <div class='tableauPlaceholder' id='viz1774693178036' style='position: relative'><noscript><a href='#'>
-<img alt='Frecuencia Cardíaca Media por mes ' 
-src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;FC&#47;FCmedia&#47;Hoja1&#47;1_rss.png' 
-style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' 
-value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' />
-<param name='name' value='FCmedia&#47;Hoja1' /><param name='tabs' value='no' /><param name='toolbar' value='yes' />
-<param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;FC&#47;FCmedia&#47;Hoja1&#47;1.png' />
- <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' />
- <param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='es-ES' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1774693178036');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';            
-        vizElement.parentNode.insertBefore(scriptElement, vizElement);    
-		</script>   
+      </div>
+      <div class="glass-panel rounded-[2rem] p-4 md:p-6 transition-transform duration-500 hover:scale-[1.01]">
+        <div class="bg-white rounded-2xl overflow-hidden shadow-sm p-2 w-full">
+          <div class="flourish-embed flourish-chart" data-src="visualisation/28165721" style="min-height: 60vh;">
+            <script src="https://public.flourish.studio/resources/embed.js"></script>
+            <noscript><img src="https://public.flourish.studio/visualisation/28165721/thumbnail" width="100%" alt="visualization"/></noscript>
+          </div>
         </div>
-        </div>
+      </div>
     </section>
 
-    <!-- Gráfico 4 - Flourish -->
-    <section>
-        <h2>Relación distancia vs calorías</h2>
-        <p class="chart-description">
-            Se puede ver la relación que hay producto de la mayor realización de ejercicio, verificando los beneficios que obtenemos de hacer ejercicio.
-        </p>
-        <div class="visual-container">
-            <div class="flourish-embed flourish-chart" data-src="visualisation/28165721">
-                <script src="https://public.flourish.studio/resources/embed.js"></script>
-                <noscript><img src="https://public.flourish.studio/visualisation/28165721/thumbnail" width="100%" alt="visualization" /></noscript>
-            </div>
-        </div>
-    </section>
+  </main>
 
-    <footer>
-        <p><strong>Trabajo Práctico: Visualización de Datos Personales</strong></p>
-        <p>Damián Silva | ECD.2025.A</p>
-        <p>Instituto Tecnológico de Buenos Aires (ITBA)</p>
-    </footer>
-</div>
+  <!-- Footer -->
+  <footer class="text-center py-16 px-4 mt-12 border-t border-white/40">
+    <p class="text-sm font-bold text-slate-700">Trabajo Práctico: Visualización de Datos Personales</p>
+    <p class="text-sm text-slate-500 mt-1">Damián Silva | ECD.2025.A</p>
+    <p class="text-sm text-slate-500">Instituto Tecnológico de Buenos Aires (ITBA)</p>
+  </footer>
+
+  <script>
+    // Dropdown
+    const dropdownBtn = document.getElementById('dropdown-btn');
+    const dropdownMenu = document.getElementById('dropdown-menu');
+    dropdownBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      dropdownMenu.classList.toggle('hidden');
+      dropdownMenu.classList.toggle('flex');
+    });
+    document.querySelectorAll('.dropdown-link').forEach(link => {
+      link.addEventListener('click', () => {
+        dropdownMenu.classList.add('hidden');
+        dropdownMenu.classList.remove('flex');
+      });
+    });
+    document.addEventListener('click', (e) => {
+      if (!dropdownBtn.contains(e.target) && !dropdownMenu.contains(e.target)) {
+        dropdownMenu.classList.add('hidden');
+        dropdownMenu.classList.remove('flex');
+      }
+    });
+
+    // Reveal on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('active');
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
 
 </body>
 </html>
